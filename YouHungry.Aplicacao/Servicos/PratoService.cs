@@ -14,40 +14,40 @@ namespace YouHungry.Aplicacao.Services
         private IPratoRepository _pratoRepository;
         private readonly IMapper _mapper;
 
-        public PratoService(IPratoRepository PratoRepository, IMapper mapper)
+        public PratoService(IPratoRepository aratoRepository, IMapper mapper)
         {
-            _pratoRepository = PratoRepository;
+            _pratoRepository = aratoRepository;
             _mapper = mapper;
         }
 
         public async Task<IEnumerable<PratoDTO>> GetPratosAsync()
         {
-            var PratosEntity = await _pratoRepository.GetPratosAsync();
-            return _mapper.Map<IEnumerable<PratoDTO>>(PratosEntity);
+            var pratosEntity = await _pratoRepository.GetPratosAsync();
+            return _mapper.Map<IEnumerable<PratoDTO>>(pratosEntity);
         }
 
         public async Task<PratoDTO> GetByIdAsync(long? id)
         {
-            var PratoEntity = await _pratoRepository.GetByIdAsync(id);
-            return _mapper.Map<PratoDTO>(PratoEntity);
+            var pratoEntity = await _pratoRepository.GetByIdAsync(id);
+            return _mapper.Map<PratoDTO>(pratoEntity);
         }
 
-        public async Task AddAsync(PratoDTO PratoDTO)
+        public async Task AddAsync(PratoDTO pratoDTO)
         {
-            var PratoEntity = _mapper.Map<Prato>(PratoDTO);
-            await _pratoRepository.CreateAsync(PratoEntity);
+            var pratoEntity = _mapper.Map<Prato>(pratoDTO);
+            await _pratoRepository.CreateAsync(pratoEntity);
         }
 
-        public async Task UpdateAsync(PratoDTO PratoDTO)
+        public async Task UpdateAsync(PratoDTO pratoDTO)
         {
-            var PratoEntity = _mapper.Map<Prato>(PratoDTO);
-            await _pratoRepository.UpdateAsync(PratoEntity);
+            var pratoEntity = _mapper.Map<Prato>(pratoDTO);
+            await _pratoRepository.UpdateAsync(pratoEntity);
         }
 
         public async Task RemoveAsync(long? id)
         {
-            var PratoEntity = await _pratoRepository.GetByIdAsync(id);
-            await _pratoRepository.RemoveAsync(PratoEntity);
+            var pratoEntity = await _pratoRepository.GetByIdAsync(id);
+            await _pratoRepository.RemoveAsync(pratoEntity);
         }
     }
 }

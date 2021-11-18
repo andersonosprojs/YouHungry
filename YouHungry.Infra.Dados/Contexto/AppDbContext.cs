@@ -11,6 +11,7 @@ namespace YouHungry.Infra.Dados.Contexto
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Restaurante> Restaurantes { get; set; }
         public DbSet<Prato> Pratos { get; set; }
+        public DbSet<Acompanhamento> Acompanhamentos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

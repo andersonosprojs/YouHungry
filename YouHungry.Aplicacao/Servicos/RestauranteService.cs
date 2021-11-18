@@ -14,40 +14,40 @@ namespace YouHungry.Aplicacao.Services
         private IRestauranteRepository _restauranteRepository;
         private readonly IMapper _mapper;
 
-        public RestauranteService(IRestauranteRepository RestauranteRepository, IMapper mapper)
+        public RestauranteService(IRestauranteRepository restauranteRepository, IMapper mapper)
         {
-            _restauranteRepository = RestauranteRepository;
+            _restauranteRepository = restauranteRepository;
             _mapper = mapper;
         }
 
         public async Task<IEnumerable<RestauranteDTO>> GetRestaurantesAsync()
         {
-            var RestaurantesEntity = await _restauranteRepository.GetRestaurantesAsync();
-            return _mapper.Map<IEnumerable<RestauranteDTO>>(RestaurantesEntity);
+            var restaurantesEntity = await _restauranteRepository.GetRestaurantesAsync();
+            return _mapper.Map<IEnumerable<RestauranteDTO>>(restaurantesEntity);
         }
 
         public async Task<RestauranteDTO> GetByIdAsync(long? id)
         {
-            var RestauranteEntity = await _restauranteRepository.GetByIdAsync(id);
-            return _mapper.Map<RestauranteDTO>(RestauranteEntity);
+            var restauranteEntity = await _restauranteRepository.GetByIdAsync(id);
+            return _mapper.Map<RestauranteDTO>(restauranteEntity);
         }
 
-        public async Task AddAsync(RestauranteDTO RestauranteDTO)
+        public async Task AddAsync(RestauranteDTO restauranteDTO)
         {
-            var RestauranteEntity = _mapper.Map<Restaurante>(RestauranteDTO);
-            await _restauranteRepository.CreateAsync(RestauranteEntity);
+            var pestauranteEntity = _mapper.Map<Restaurante>(restauranteDTO);
+            await _restauranteRepository.CreateAsync(pestauranteEntity);
         }
 
-        public async Task UpdateAsync(RestauranteDTO RestauranteDTO)
+        public async Task UpdateAsync(RestauranteDTO restauranteDTO)
         {
-            var RestauranteEntity = _mapper.Map<Restaurante>(RestauranteDTO);
-            await _restauranteRepository.UpdateAsync(RestauranteEntity);
+            var restauranteEntity = _mapper.Map<Restaurante>(restauranteDTO);
+            await _restauranteRepository.UpdateAsync(restauranteEntity);
         }
 
         public async Task RemoveAsync(long? id)
         {
-            var RestauranteEntity = await _restauranteRepository.GetByIdAsync(id);
-            await _restauranteRepository.RemoveAsync(RestauranteEntity);
+            var restauranteEntity = await _restauranteRepository.GetByIdAsync(id);
+            await _restauranteRepository.RemoveAsync(restauranteEntity);
         }
     }
 }

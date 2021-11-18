@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using YouHungry.Aplicacao.DTOs;
 using YouHungry.Aplicacao.Interfaces;
 
-namespace CleanArchMvc.API.Controllers
+namespace YouHungry.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

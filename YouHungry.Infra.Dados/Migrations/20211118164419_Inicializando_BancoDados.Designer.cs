@@ -9,8 +9,8 @@ using YouHungry.Infra.Dados.Contexto;
 namespace YouHungry.Infra.Dados.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211117203034_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20211118164419_Inicializando_BancoDados")]
+    partial class Inicializando_BancoDados
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,12 +20,59 @@ namespace YouHungry.Infra.Dados.Migrations
                 .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("YouHungry.Dominio.Entidades.Acompanhamento", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Acompanhamentos");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Nome = "Arroz"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            Nome = "Feijão"
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            Nome = "Ovo frito"
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            Nome = "Farofa"
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            Nome = "Purê"
+                        });
+                });
+
             modelBuilder.Entity("YouHungry.Dominio.Entidades.Prato", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("AcompanhamentoId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -54,6 +101,8 @@ namespace YouHungry.Infra.Dados.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AcompanhamentoId");
 
                     b.HasIndex("RestauranteId");
 
@@ -147,17 +196,47 @@ namespace YouHungry.Infra.Dados.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Cep = "99999999",
+                            Cidade = "Cidade",
+                            Email = "admin@admin.com",
+                            Endereco = "Endereco Administrador",
+                            Nome = "Usuario Administrador",
+                            Senha = "@dmin"
+                        });
                 });
 
             modelBuilder.Entity("YouHungry.Dominio.Entidades.Prato", b =>
                 {
+                    b.HasOne("YouHungry.Dominio.Entidades.Acompanhamento", "acompanhamento")
+                        .WithMany("Pratos")
+                        .HasForeignKey("AcompanhamentoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("YouHungry.Dominio.Entidades.Restaurante", "restaurante")
-                        .WithMany()
+                        .WithMany("Pratos")
                         .HasForeignKey("RestauranteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("acompanhamento");
+
                     b.Navigation("restaurante");
+                });
+
+            modelBuilder.Entity("YouHungry.Dominio.Entidades.Acompanhamento", b =>
+                {
+                    b.Navigation("Pratos");
+                });
+
+            modelBuilder.Entity("YouHungry.Dominio.Entidades.Restaurante", b =>
+                {
+                    b.Navigation("Pratos");
                 });
 #pragma warning restore 612, 618
         }

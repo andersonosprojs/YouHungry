@@ -14,9 +14,9 @@ namespace YouHungry.Aplicacao.Services
         private IUsuarioRepository _usuarioRepository;
         private readonly IMapper _mapper;
 
-        public UsuarioService(IUsuarioRepository UsuarioRepository, IMapper mapper)
+        public UsuarioService(IUsuarioRepository usuarioRepository, IMapper mapper)
         {
-            _usuarioRepository = UsuarioRepository;
+            _usuarioRepository = usuarioRepository;
             _mapper = mapper;
         }
 
@@ -28,26 +28,26 @@ namespace YouHungry.Aplicacao.Services
 
         public async Task<UsuarioDTO> GetByIdAsync(long? id)
         {
-            var UsuarioEntity = await _usuarioRepository.GetByIdAsync(id);
-            return _mapper.Map<UsuarioDTO>(UsuarioEntity);
+            var usuarioEntity = await _usuarioRepository.GetByIdAsync(id);
+            return _mapper.Map<UsuarioDTO>(usuarioEntity);
         }
 
-        public async Task AddAsync(UsuarioDTO UsuarioDTO)
+        public async Task AddAsync(UsuarioDTO usuarioDTO)
         {
-            var UsuarioEntity = _mapper.Map<Usuario>(UsuarioDTO);
-            await _usuarioRepository.CreateAsync(UsuarioEntity);
+            var usuarioEntity = _mapper.Map<Usuario>(usuarioDTO);
+            await _usuarioRepository.CreateAsync(usuarioEntity);
         }
 
-        public async Task UpdateAsync(UsuarioDTO UsuarioDTO)
+        public async Task UpdateAsync(UsuarioDTO usuarioDTO)
         {
-            var UsuarioEntity = _mapper.Map<Usuario>(UsuarioDTO);
-            await _usuarioRepository.UpdateAsync(UsuarioEntity);
+            var usuarioEntity = _mapper.Map<Usuario>(usuarioDTO);
+            await _usuarioRepository.UpdateAsync(usuarioEntity);
         }
 
         public async Task RemoveAsync(long? id)
         {
-            var UsuarioEntity = await _usuarioRepository.GetByIdAsync(id);
-            await _usuarioRepository.RemoveAsync(UsuarioEntity);
+            var usuarioEntity = await _usuarioRepository.GetByIdAsync(id);
+            await _usuarioRepository.RemoveAsync(usuarioEntity);
         }
     }
 }

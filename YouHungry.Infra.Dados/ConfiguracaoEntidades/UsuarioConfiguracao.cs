@@ -35,9 +35,7 @@ namespace CleanArchMvc.Infra.Data.EntitiesConfiguration
                 .IsRequired();
 
             builder.HasData(
-                new Usuario(1, "email1@teste.com", "Usuario 1", "32070080","Rua Teste 1, 123", "Contagem", "123456"),
-                new Usuario(2, "email2@teste.com", "Usuario 2", "32070081", "Rua Teste 2, 234", "Belo Horizonte", "234567"),
-                new Usuario(3, "email3@teste.com", "Usuario 3", "32070082", "Rua Teste 2, 345", "Betim", "345678")
+                new Usuario(1, "admin@admin.com", "Usuario Administrador", "99999999","Endereco Administrador", "Cidade", "@dmin")
                 );
         }
     }

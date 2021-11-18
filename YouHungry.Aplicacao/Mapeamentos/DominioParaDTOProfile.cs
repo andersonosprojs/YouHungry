@@ -11,6 +11,7 @@ namespace CleanArchMvc.Application.Mappings
             CreateMap<Usuario, UsuarioDTO>().ReverseMap();
             CreateMap<Restaurante, RestauranteDTO>().ReverseMap();
             CreateMap<Prato, PratoDTO>().ReverseMap();
+            CreateMap<Acompanhamento, AcompanhamentoDTO>().ReverseMap();
         }
     }
 }

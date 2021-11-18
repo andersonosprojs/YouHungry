@@ -21,12 +21,12 @@ namespace YouHungry.Dominio.Entidades
             ValidarDominio(nome, descricao, preco, tempoPreparo, imagem);
         }
 
-        public void Update(string nome, string descricao, double preco, string tempoPreparo, string imagem, long restauranteId/*, long acompanhamentoId*/)
+        public void Update(string nome, string descricao, double preco, string tempoPreparo, string imagem, long restauranteId, long acompanhamentoId)
         {
             ValidarDominio(nome, descricao, preco, tempoPreparo, imagem);
 
             RestauranteId = restauranteId;
-            //AcompanhamentoId = acompanhamentoId;
+            AcompanhamentoId = acompanhamentoId;
         }
 
         private void ValidarDominio(string nome, string descricao, double preco, string tempoPreparo, string imagem)
@@ -53,7 +53,7 @@ namespace YouHungry.Dominio.Entidades
         public long RestauranteId { get; set; }
         public Restaurante restaurante { get; set; }
 
-        //public long AcompanhamentoId { get; set; }
-        //public Acompanhamento acompanhamento { get; set; }
+        public long AcompanhamentoId { get; set; }
+        public Acompanhamento acompanhamento { get; set; }
     }
 }

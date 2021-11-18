@@ -24,10 +24,12 @@ namespace YouHungry.Infra.IoC
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IRestauranteRepository, RestauranteRepository>();
             services.AddScoped<IPratoRepository, PratoRepository>();
+            services.AddScoped<IAcompanhamentoRepository, AcompanhamentoRepository>();
 
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<IRestauranteService, RestauranteService>();
             services.AddScoped<IPratoService, PratoService>();
+            services.AddScoped<IAcompanhamentoService, AcompanhamentoService>();
 
             services.AddAutoMapper(typeof(DominioParaDTOProfile));
 

@@ -1,4 +1,5 @@
-﻿using YouHungry.Dominio.Validacao;
+﻿using System.Collections.Generic;
+using YouHungry.Dominio.Validacao;
 
 namespace YouHungry.Dominio.Entidades
 {
@@ -55,5 +56,7 @@ namespace YouHungry.Dominio.Entidades
             Cidade = cidade;
             Senha = senha;
         }
+
+        public ICollection<Prato> Pratos { get; set; }
     }
 }

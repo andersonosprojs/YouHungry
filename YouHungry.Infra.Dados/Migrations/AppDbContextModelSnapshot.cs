@@ -18,12 +18,59 @@ namespace YouHungry.Infra.Dados.Migrations
                 .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("YouHungry.Dominio.Entidades.Acompanhamento", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Acompanhamentos");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Nome = "Arroz"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            Nome = "Feijão"
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            Nome = "Ovo frito"
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            Nome = "Farofa"
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            Nome = "Purê"
+                        });
+                });
+
             modelBuilder.Entity("YouHungry.Dominio.Entidades.Prato", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("AcompanhamentoId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -52,6 +99,8 @@ namespace YouHungry.Infra.Dados.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AcompanhamentoId");
 
                     b.HasIndex("RestauranteId");
 
@@ -150,44 +199,42 @@ namespace YouHungry.Infra.Dados.Migrations
                         new
                         {
                             Id = 1L,
-                            Cep = "32070080",
-                            Cidade = "Contagem",
-                            Email = "email1@teste.com",
-                            Endereco = "Rua Teste 1, 123",
-                            Nome = "Usuario 1",
-                            Senha = "123456"
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            Cep = "32070081",
-                            Cidade = "Belo Horizonte",
-                            Email = "email2@teste.com",
-                            Endereco = "Rua Teste 2, 234",
-                            Nome = "Usuario 2",
-                            Senha = "234567"
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            Cep = "32070082",
-                            Cidade = "Betim",
-                            Email = "email3@teste.com",
-                            Endereco = "Rua Teste 2, 345",
-                            Nome = "Usuario 3",
-                            Senha = "345678"
+                            Cep = "99999999",
+                            Cidade = "Cidade",
+                            Email = "admin@admin.com",
+                            Endereco = "Endereco Administrador",
+                            Nome = "Usuario Administrador",
+                            Senha = "@dmin"
                         });
                 });
 
             modelBuilder.Entity("YouHungry.Dominio.Entidades.Prato", b =>
                 {
+                    b.HasOne("YouHungry.Dominio.Entidades.Acompanhamento", "acompanhamento")
+                        .WithMany("Pratos")
+                        .HasForeignKey("AcompanhamentoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("YouHungry.Dominio.Entidades.Restaurante", "restaurante")
-                        .WithMany()
+                        .WithMany("Pratos")
                         .HasForeignKey("RestauranteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("acompanhamento");
+
                     b.Navigation("restaurante");
+                });
+
+            modelBuilder.Entity("YouHungry.Dominio.Entidades.Acompanhamento", b =>
+                {
+                    b.Navigation("Pratos");
+                });
+
+            modelBuilder.Entity("YouHungry.Dominio.Entidades.Restaurante", b =>
+                {
+                    b.Navigation("Pratos");
                 });
 #pragma warning restore 612, 618
         }

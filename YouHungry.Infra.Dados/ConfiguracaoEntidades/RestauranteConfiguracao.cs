@@ -37,12 +37,6 @@ namespace CleanArchMvc.Infra.Data.EntitiesConfiguration
             builder.Property(table => table.Senha)
                 .HasMaxLength(200)
                 .IsRequired();
-
-            //builder.HasData(
-            //    new Restaurante(1, "12345678901234", "Restaurante 1", "Cozinha Mineira", "32070080", "Rua Teste 1", "Contagem", "123456"),
-            //    new Restaurante(2, "11111111111111", "Restaurante 2", "Cozinha Japonesa", "32070081", "Rua Teste 2, 234", "Belo Horizonte", "234567"),
-            //    new Restaurante(3, "22222222222222", "Restaurante 3", "Cozinha Mexicana", "32070082", "Rua Teste 3, 345", "Betim", "345678")
-            //    );
         }
     }
 }
